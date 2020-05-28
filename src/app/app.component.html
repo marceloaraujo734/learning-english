@@ -1,12 +1,37 @@
 <app-header></app-header>
-<app-panel></app-panel>
-<!-- <div class="container">
 
-  <div class="jumbotron" >
-    <div class="button-group">
-      <a class="button-yellow" href="#">Conheça nossos planos</a>
+<div *ngIf="gameInProgress == true; else gameFinish">
+  <app-panel (endGame)="endGame($event)"></app-panel>
+</div>
+<ng-template #gameFinish>
+
+  <div *ngIf="verifyGameLose(gameProgress)">
+    <div class="container">
+      <div class="alert alert-danger" role="alert">
+        <h1 class="display-4">Poxa vida!</h1>
+        <p class="lead">O segredo do sucesso é nunca desistir, continue tentando que o resultado irá aparecer em breve!</p>
+        <hr class="my-4">
+        <div class="d-flex justify-content-end">
+          <button class="btn btn-primary" (click)="restartGame()">Jogar novamente</button>
+        </div>
+      </div>
     </div>
   </div>
 
-</div> -->
+  <div *ngIf="verifyGameWin(gameProgress)">
+    <div class="container">
+      <div class="alert alert-success" role="alert">
+        <h1 class="display-4">Parabéns!</h1>
+        <p class="lead">Quem persevera sempre alcança seus objetivos, e você é perseverante!</p>
+        <hr class="my-4">
+        <div class="d-flex justify-content-end">
+          <button class="btn btn-primary" (click)="restartGame()">Jogar novamente</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</ng-template>
+
+
 
